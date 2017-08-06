@@ -279,7 +279,6 @@ void LCD_AUTOScan_Dir(u8 dir)
 * 返回参数：无
 * 说    明：
 ****************************************************************************/
-
 void LCD_Display_Dir(u8 dir)
 {
 	if(dir==0)		  //竖屏
@@ -430,14 +429,14 @@ void LCD_FSMC_Config()
 	
 	RCC_AHB3PeriphClockCmd(RCC_AHB3Periph_FSMC,ENABLE);//使能FSMC时钟  
 	
-	GPIO_InitStructure.GPIO_Pin = GPIO_Pin_13;        //PF10 推挽输出,控制背光
-  GPIO_InitStructure.GPIO_Mode = GPIO_Mode_OUT;     //普通输出模式
- GPIO_InitStructure.GPIO_OType = GPIO_OType_PP;    //推挽输出
-  GPIO_InitStructure.GPIO_Speed = GPIO_Speed_50MHz; //100MHz
-  GPIO_InitStructure.GPIO_PuPd = GPIO_PuPd_UP;      //上拉
-  GPIO_Init(GPIOA, &GPIO_InitStructure);            //初始化   // by ycnalin LCD_backlight直接接GND 
-	GPIO_SetBits(GPIOA,GPIO_Pin_13);
-	
+//	GPIO_InitStructure.GPIO_Pin = GPIO_Pin_13;        //PF10 推挽输出,控制背光
+//  GPIO_InitStructure.GPIO_Mode = GPIO_Mode_OUT;     //普通输出模式
+// GPIO_InitStructure.GPIO_OType = GPIO_OType_PP;    //推挽输出
+//  GPIO_InitStructure.GPIO_Speed = GPIO_Speed_50MHz; //100MHz
+//  GPIO_InitStructure.GPIO_PuPd = GPIO_PuPd_UP;      //上拉
+//  GPIO_Init(GPIOA, &GPIO_InitStructure);            //初始化   // by ycnalin LCD_backlight直接接GND 
+//	GPIO_SetBits(GPIOA,GPIO_Pin_13);
+//	
   GPIO_InitStructure.GPIO_Pin = (3<<0)|(3<<4)|(7<<8)|(3<<14); 
   GPIO_InitStructure.GPIO_Mode = GPIO_Mode_AF;      //复用输出
   GPIO_InitStructure.GPIO_OType = GPIO_OType_PP;    //推挽输出

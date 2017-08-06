@@ -29,8 +29,8 @@ static void Task_20ms(void)
 
 static void Task_50ms(void)
 {
-	if (NS==Stop)
-	LED_Duty();
+//	if (NS==Stop)
+//	LED_Duty();
 }
 
 void ControlLoop(void)																//ControlLoop中将各种任务分为1ms、2ms、5ms、10ms、20ms任务

@@ -21,7 +21,6 @@
 #include "gpio.h"
 #include "bsp_flash.h"
 #include "lcd.h"
-#include "ov7670.h"
 
 
 #endif
