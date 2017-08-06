@@ -488,6 +488,11 @@
               <FileType>1</FileType>
               <FilePath>.\driver\ov7670.c</FilePath>
             </File>
+            <File>
+              <FileName>sccb.c</FileName>
+              <FileType>1</FileType>
+              <FilePath>.\driver\sccb.c</FilePath>
+            </File>
           </Files>
         </Group>
         <Group>
