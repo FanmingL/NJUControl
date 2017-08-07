@@ -1,5 +1,4 @@
 #include "main.h"
-
 static void Task_2ms(void)
 {
 	float inner_loop_time = GetInnerLoop(Task_2ms_Time)/1000000.0f;
@@ -29,6 +28,7 @@ static void Task_20ms(void)
 
 static void Task_50ms(void)
 {
+//	LCD_DisplayNum(30,30,(u32)Camera_fps,5,16,0);
 //	if (NS==Stop)
 //	LED_Duty();
 }

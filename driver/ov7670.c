@@ -130,13 +130,14 @@ int OV7670_Configuration(void){
 	
 }
 
-
+float Camera_fps=0.0f;
 void DCMI_IRQHandler(void)
 {
 	if(DCMI_GetITStatus(DCMI_IT_FRAME)==SET)//捕获到一帧图像
 	{
 		DCMI_ClearITPendingBit(DCMI_IT_FRAME);//清除帧中断
 		LED_Duty();
+		Camera_fps=1/(GetInnerLoop(DCMI_Time)/1000000.0f);
 	}
 } 
 

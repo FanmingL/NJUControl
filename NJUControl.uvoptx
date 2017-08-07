@@ -191,22 +191,6 @@
         <Bp>
           <Number>0</Number>
           <Type>0</Type>
-          <LineNumber>95</LineNumber>
-          <EnabledFlag>0</EnabledFlag>
-          <Address>134236764</Address>
-          <ByteObject>0</ByteObject>
-          <HtxType>0</HtxType>
-          <ManyObjects>0</ManyObjects>
-          <SizeOfObject>0</SizeOfObject>
-          <BreakByAccess>0</BreakByAccess>
-          <BreakIfRCount>1</BreakIfRCount>
-          <Filename>.\driver\ov7670.c</Filename>
-          <ExecCommand></ExecCommand>
-          <Expression>\\NJUControl\driver/ov7670.c\95</Expression>
-        </Bp>
-        <Bp>
-          <Number>1</Number>
-          <Type>0</Type>
           <LineNumber>112</LineNumber>
           <EnabledFlag>0</EnabledFlag>
           <Address>134236916</Address>
@@ -221,7 +205,7 @@
           <Expression>\\NJUControl\driver/sccb.c\112</Expression>
         </Bp>
         <Bp>
-          <Number>2</Number>
+          <Number>1</Number>
           <Type>0</Type>
           <LineNumber>106</LineNumber>
           <EnabledFlag>0</EnabledFlag>
@@ -237,7 +221,7 @@
           <Expression>\\NJUControl\driver/sccb.c\106</Expression>
         </Bp>
         <Bp>
-          <Number>3</Number>
+          <Number>2</Number>
           <Type>0</Type>
           <LineNumber>70</LineNumber>
           <EnabledFlag>0</EnabledFlag>
