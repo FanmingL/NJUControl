@@ -20,21 +20,18 @@ union _Pid_un_
 	uint8_t pid_array[sizeof(saveToFlash_st)];
 };
 extern union _Pid_un_ pid_un;
-extern _PID_arg_st Motor_arg;
-extern _PID_arg_st PitchS_arg;
-extern _PID_arg_st PitchP_arg;
-extern _PID_arg_st RollS_arg;
-extern _PID_arg_st RollP_arg;
+extern _PID_arg_st PID1_arg;
+extern _PID_arg_st PID2_arg;
+extern _PID_arg_st PID3_arg;
+extern _PID_arg_st PID4_arg;
+extern _PID_arg_st PID5_arg;
 
 
-extern _PID_val_st Motor1_val;
-extern _PID_val_st	Motor2_val;
-extern _PID_val_st Motor3_val;
-extern _PID_val_st	Motor4_val;
-extern _PID_val_st PitchS_val;
-extern _PID_val_st PitchP_val;
-extern _PID_val_st RollS_val;
-extern _PID_val_st RollP_val;
+extern _PID_val_st PID1_val;
+extern _PID_val_st PID2_val;
+extern _PID_val_st PID3_val;
+extern _PID_val_st PID4_val;
+extern _PID_val_st PID5_val;
 void Para_ResetToFactorySetup(void);
 void Param_SaveAccelOffset(xyz_f_t *offset);
 void Param_SaveGyroOffset(xyz_f_t *offset);

@@ -493,6 +493,11 @@
               <FileType>1</FileType>
               <FilePath>.\driver\sccb.c</FilePath>
             </File>
+            <File>
+              <FileName>adc.c</FileName>
+              <FileType>1</FileType>
+              <FilePath>.\driver\adc.c</FilePath>
+            </File>
           </Files>
         </Group>
         <Group>

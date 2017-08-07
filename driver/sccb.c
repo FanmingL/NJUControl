@@ -17,6 +17,7 @@ void SCCB_Configuration(void)
   	GPIO_Init(GPIOE, &GPIO_InitStructure);
 		SCCB_SDA_OUT();
 }
+
 void SCCB_Start(void)
 {
     SCCB_SID_H();     //数据线高电平

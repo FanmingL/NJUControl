@@ -8,6 +8,7 @@
 	TIM6_Configuration();																//TIM6初始化
 	Usart2_Init(115200);																//串口2初始化
 	PWM_Configuration();																//PWM初始化
+	Adc_Init();																					//ADC初始化
 	GPIO_Configuration();																//GPIO初始化
 	Para_ResetToFactorySetup();													//从flash读取保存的参数
 	PID_Para_Init();																		//PID初始化

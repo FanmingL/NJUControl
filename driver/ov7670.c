@@ -3,14 +3,6 @@
 #include "ov7670.h"
 static void my_Configuration(void)
 {
-	//OV_WriteReg(0x0D,0x18);
-//	OV_WriteReg(0x11,0x00);
-//	OV_WriteReg(0x12,0x46);
-//	OV_WriteReg(0x40,0xf0);
-//		OV_WriteReg(0x35,0x3A);
-//		OV_WriteReg(0x3A,0x15);
-	
-	
 }
 
 int OV7670_Configuration(void){

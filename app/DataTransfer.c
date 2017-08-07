@@ -121,13 +121,13 @@ void DataTransferTask(u32 sys_time)
 	}
 	else if((sys_time+2)%10==0)
 	{
-		if (send_pid1){ANO_DT_Send_PID(1,PitchP_arg.kp,PitchP_arg.ki,PitchP_arg.kd,
-																			PitchS_arg.kp,PitchS_arg.ki,PitchS_arg.kd,
-																			RollP_arg.kp,RollP_arg.ki,RollP_arg.kd);
+		if (send_pid1){ANO_DT_Send_PID(1,PID1_arg.kp,PID1_arg.ki,PID1_arg.kd,
+																			PID2_arg.kp,PID2_arg.ki,PID2_arg.kd,
+																			PID3_arg.kp,PID3_arg.ki,PID3_arg.kd);
 		send_pid1=0;}
 		else if(send_pid2){
-		ANO_DT_Send_PID(2,RollS_arg.kp,RollS_arg.ki,RollS_arg.kd,
-																			Motor_arg.kp,Motor_arg.ki,Motor_arg.kd,
+		ANO_DT_Send_PID(2,PID4_arg.kp,PID4_arg.ki,PID4_arg.kd,
+																			PID5_arg.kp,PID5_arg.ki,PID5_arg.kd,
 																			0,0,0);
 		send_pid2=0;
 		}
@@ -255,15 +255,15 @@ if(*(data_buf+2)==0X02)
 	}
 		if(*(data_buf+2)==0X10)								//PID1
     {
-        PitchP_arg.kp  = 0.01*( (vs16)(*(data_buf+4)<<8)|*(data_buf+5) );
-        PitchP_arg.ki  = 0.01*( (vs16)(*(data_buf+6)<<8)|*(data_buf+7) );
-        PitchP_arg.kd  = 0.01*( (vs16)(*(data_buf+8)<<8)|*(data_buf+9) );
-        PitchS_arg.kp = 0.01*( (vs16)(*(data_buf+10)<<8)|*(data_buf+11) );
-        PitchS_arg.ki = 0.01*( (vs16)(*(data_buf+12)<<8)|*(data_buf+13) );
-        PitchS_arg.kd = 0.01*( (vs16)(*(data_buf+14)<<8)|*(data_buf+15) );
-        RollP_arg.kp 	= 0.01*( (vs16)(*(data_buf+16)<<8)|*(data_buf+17) );
-        RollP_arg.ki 	= 0.01*( (vs16)(*(data_buf+18)<<8)|*(data_buf+19) );
-        RollP_arg.kd 	= 0.01*( (vs16)(*(data_buf+20)<<8)|*(data_buf+21) );
+        PID1_arg.kp  = 0.01*( (vs16)(*(data_buf+4)<<8)|*(data_buf+5) );
+        PID1_arg.ki  = 0.01*( (vs16)(*(data_buf+6)<<8)|*(data_buf+7) );
+        PID1_arg.kd  = 0.01*( (vs16)(*(data_buf+8)<<8)|*(data_buf+9) );
+        PID2_arg.kp = 0.01*( (vs16)(*(data_buf+10)<<8)|*(data_buf+11) );
+        PID2_arg.ki = 0.01*( (vs16)(*(data_buf+12)<<8)|*(data_buf+13) );
+        PID2_arg.kd = 0.01*( (vs16)(*(data_buf+14)<<8)|*(data_buf+15) );
+        PID3_arg.kp 	= 0.01*( (vs16)(*(data_buf+16)<<8)|*(data_buf+17) );
+        PID3_arg.ki 	= 0.01*( (vs16)(*(data_buf+18)<<8)|*(data_buf+19) );
+        PID3_arg.kd 	= 0.01*( (vs16)(*(data_buf+20)<<8)|*(data_buf+21) );
 				if(send_check == 0)
 				{
 					send_check = 1;
@@ -273,12 +273,12 @@ if(*(data_buf+2)==0X02)
     }
 		 if(*(data_buf+2)==0X11)								//PID2
     {
-        RollS_arg.kp  = 0.01*( (vs16)(*(data_buf+4)<<8)|*(data_buf+5) );
-        RollS_arg.ki  = 0.01*( (vs16)(*(data_buf+6)<<8)|*(data_buf+7) );
-        RollS_arg.kd  = 0.01*( (vs16)(*(data_buf+8)<<8)|*(data_buf+9) );
-        Motor_arg.kp = 0.01*( (vs16)(*(data_buf+10)<<8)|*(data_buf+11) );
-        Motor_arg.ki = 0.01*( (vs16)(*(data_buf+12)<<8)|*(data_buf+13) );
-        Motor_arg.kd = 0.01*( (vs16)(*(data_buf+14)<<8)|*(data_buf+15) );
+        PID4_arg.kp  = 0.01*( (vs16)(*(data_buf+4)<<8)|*(data_buf+5) );
+        PID4_arg.ki  = 0.01*( (vs16)(*(data_buf+6)<<8)|*(data_buf+7) );
+        PID4_arg.kd  = 0.01*( (vs16)(*(data_buf+8)<<8)|*(data_buf+9) );
+        PID5_arg.kp = 0.01*( (vs16)(*(data_buf+10)<<8)|*(data_buf+11) );
+        PID5_arg.ki = 0.01*( (vs16)(*(data_buf+12)<<8)|*(data_buf+13) );
+        PID5_arg.kd = 0.01*( (vs16)(*(data_buf+14)<<8)|*(data_buf+15) );
 						if(send_check == 0)
 				{
 					send_check = 1;

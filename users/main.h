@@ -21,7 +21,7 @@
 #include "gpio.h"
 #include "bsp_flash.h"
 #include "lcd.h"
-
+#include "adc.h"
 
 #endif
 
