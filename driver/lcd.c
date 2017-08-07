@@ -787,7 +787,7 @@ if(lcd_id==0x9328) //ILI9328初始化
 		delay_ms(120);
 		LCD_CMD=0x29; //display on	
 	}
-	LCD_Display_Dir(0);		 //初始化为竖屏
+	LCD_Display_Dir(1);		 //初始化为竖屏
 	LCD_BACK=1;					   //点亮背光
 	LCD_Clear(WHITE);
 }

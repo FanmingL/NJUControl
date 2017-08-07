@@ -3,7 +3,7 @@
 #include "ov7670.h"
 static void my_Configuration(void)
 {
-	OV_WriteReg(0x0D,0x18);
+	//OV_WriteReg(0x0D,0x18);
 //	OV_WriteReg(0x11,0x00);
 //	OV_WriteReg(0x12,0x46);
 //	OV_WriteReg(0x40,0xf0);
@@ -34,7 +34,7 @@ int OV7670_Configuration(void){
   	GPIO_InitStructure.GPIO_PuPd = GPIO_PuPd_UP;  
   	GPIO_Init(GPIOA, &GPIO_InitStructure);	   
 		GPIO_PinAFConfig(GPIOA, GPIO_PinSource8, GPIO_AF_MCO);//MCO1:PA8  
-    RCC_MCO1Config(RCC_MCO1Source_HSE, RCC_MCO1Div_1);
+    RCC_MCO1Config(RCC_MCO1Source_HSI, RCC_MCO1Div_2);
 
     GPIO_InitStructure.GPIO_Pin = GPIO_Pin_7;//PA7:PWRDOWN
     GPIO_InitStructure.GPIO_Mode = GPIO_Mode_OUT; 
@@ -91,7 +91,7 @@ int OV7670_Configuration(void){
   	DMA_InitStructure.DMA_PeripheralBaseAddr = (u32)&DCMI->DR;
   	DMA_InitStructure.DMA_Memory0BaseAddr = FSMC_LCD_ADDRESS;//camera//USART2->DR
   	DMA_InitStructure.DMA_DIR = DMA_DIR_PeripheralToMemory;
-  	DMA_InitStructure.DMA_BufferSize = 1;
+  	DMA_InitStructure.DMA_BufferSize = 50;
   	DMA_InitStructure.DMA_PeripheralInc = DMA_PeripheralInc_Disable;
   	DMA_InitStructure.DMA_MemoryInc = DMA_MemoryInc_Disable;
   	DMA_InitStructure.DMA_PeripheralDataSize = DMA_PeripheralDataSize_Word;
@@ -114,7 +114,7 @@ int OV7670_Configuration(void){
 		NVIC_InitStructure.NVIC_IRQChannelCmd = ENABLE;			//IRQ通道使能
 		NVIC_Init(&NVIC_InitStructure);	//根据指定的参数初始化VIC寄存器、
 		
-  	for(i=0;i<OV7670_REG_NUM;i++)
+  	for(i=0;i<sizeof(OV7670_reg)/sizeof(OV7670_reg[0]);i++)
   	{
    	if(OV_WriteReg(OV7670_reg[i][0],OV7670_reg[i][1])){
 			return 1;
