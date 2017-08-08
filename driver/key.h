@@ -5,6 +5,8 @@ void Key_Configuration(void);
 char Get_KeyValue(void);
 
 void Mode_Task(void);
+void EXTI_Configuration(void);
+extern int step;
 #define Key1_GPIO GPIOB
 #define Key2_GPIO GPIOC
 #define Key3_GPIO GPIOC

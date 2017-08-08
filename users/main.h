@@ -24,6 +24,6 @@
 #include "adc.h"
 #include "ov7670.h"
 #include "key.h"
-
+#include "exti.h"
 #endif
 
