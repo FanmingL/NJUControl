@@ -23,14 +23,12 @@ static void Task_10ms(void)
 
 static void Task_20ms(void)
 {
-	SetPWMOut(100,200,300,400);
+	
 }
 
 static void Task_50ms(void)
 {
-//	LCD_DisplayNum(30,30,(u32)Camera_fps,5,16,0);
-//	if (NS==Stop)
-//	LED_Duty();
+	
 }
 
 void ControlLoop(void)																//ControlLoop中将各种任务分为1ms、2ms、5ms、10ms、20ms任务

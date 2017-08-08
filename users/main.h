@@ -22,6 +22,8 @@
 #include "bsp_flash.h"
 #include "lcd.h"
 #include "adc.h"
+#include "ov7670.h"
+#include "key.h"
 
 #endif
 

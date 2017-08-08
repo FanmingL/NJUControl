@@ -1,5 +1,4 @@
 #include "main.h"
-#include "ov7670.h"
  void All_Init(void)
 {
 	NVIC_PriorityGroupConfig(NVIC_PriorityGroup_2);    
@@ -10,6 +9,7 @@
 	PWM_Configuration();																//PWM初始化
 	Adc_Init();																					//ADC初始化
 	GPIO_Configuration();																//GPIO初始化
+	Key_Configuration();																//按键
 	Para_ResetToFactorySetup();													//从flash读取保存的参数
 	PID_Para_Init();																		//PID初始化
 	I2c_Soft_Init();																		//iic初始化
@@ -19,10 +19,13 @@
 	ak8975_ok = !(ANO_AK8975_Run());										//磁力计初始化
 	delay_ms(100);
 	LCD_Init();
-	LCD_Clear(WHITE);
-	OV7670_Configuration();
+	LCD_Clear(BLACK);
+	BRUSH_COLOR=WHITE;	//画笔颜色
+	BACK_COLOR=BLACK;  //背景色 
+//	OV7670_Configuration();
 	InnerLoopInit();																		//内环周期初始化
 	TIM6_Start();																				//ControlLoop开始
+	Mode_Task();
 }
 
 

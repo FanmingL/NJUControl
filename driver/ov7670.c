@@ -1,6 +1,5 @@
 #include "main.h"
 #include "sccb.h"
-#include "ov7670.h"
 static void my_Configuration(void)
 {
 }

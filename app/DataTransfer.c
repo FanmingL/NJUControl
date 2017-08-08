@@ -196,7 +196,6 @@ void Usart2_DataPrepare(u8 data)
 		state = 0;
 
 }
-float AngleWithGradiantFromUsart=0.0f,ExpAngleFromUsart=0.0f;
 enum PendulumMode NS=Stop;										//NS用于切换模式，Stop为停止模式，Task1到Task6分别为题1至题2
 void Data_Receive_Anl(u8 *data_buf,u8 num)
 {
@@ -290,8 +289,6 @@ if(*(data_buf+2)==0X02)
     	if(*(data_buf+2)==0X03)
 	{
 
-		ExpAngleFromUsart = ((vs16)(*(data_buf+8)<<8)|*(data_buf+9))/100.0f-35.0f;
-		AngleWithGradiantFromUsart = ((vs16)(*(data_buf+10)<<8)|*(data_buf+11))/100.0f ;
 		
 	}
     if(*(data_buf+2)==0X12)								//PID3

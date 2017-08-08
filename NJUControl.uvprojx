@@ -498,6 +498,11 @@
               <FileType>1</FileType>
               <FilePath>.\driver\adc.c</FilePath>
             </File>
+            <File>
+              <FileName>key.c</FileName>
+              <FileType>1</FileType>
+              <FilePath>.\driver\key.c</FilePath>
+            </File>
           </Files>
         </Group>
         <Group>
