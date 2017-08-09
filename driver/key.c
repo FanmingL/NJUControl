@@ -88,7 +88,7 @@ char Get_KeyValue(void)
 }
 #define String_LENGTH 10
 int step=1;
-char Info_String[String_LENGTH][30]={{"Task1"},{"Task2"},{"Task3"},{"Task4"},{"Task5"},{"Task6"},{"Stop"},{"Press 8 and 2 To choose"},{"Press 5 To enter"},{"Press D To Choose Stop"}};
+char Info_String[String_LENGTH][30]={{"Task1"},{"Task2"},{"Task3"},{"Task4"},{"Task5"},{"Task6"},{"Stop"},{"Press 8 and 2 To choose"},{"Press 5 To enter"},{"Press B To Calibrate"}};
 void Mode_Task(void)
 {
 	char temp;
@@ -107,14 +107,27 @@ void Mode_Task(void)
 			}else if (temp=='2'){
 				step--;
 				step=LIMIT(step,1,7);
+			}else if (temp=='B')
+			{
+
+			mpu6050.Acc_CALIBRATE = 1;		
+			mpu6050.Gyro_CALIBRATE = 1;	
+			LCD_Clear(BLACK);
+				LCD_DisplayString(50,50,16,"Calibrating...");
+				LCD_DisplayString(50,80,16,"Do not Touch it...");
+				
+				delay_ms(5000);
+					AppParamSave();
+				LCD_Clear(BLACK);
+				
 			}
+			
 		for (i=1;i<String_LENGTH+1;i++){
 			LCD_DisplayString(40,i*30,16,(u8*)Info_String[i-1]);
 		}
 			BACK_COLOR=RED;
 			LCD_DisplayString(40,step*30,16,(u8*)Info_String[step-1]);
 			BACK_COLOR=BLACK;
-			delay_ms(300);
 		if (temp=='5'){
 			if (step!=0)
 			{NS = (enum PendulumMode)step;}
@@ -125,11 +138,13 @@ void Mode_Task(void)
 			LCD_DisplayString(40,30,16,"Now You Choose ");
 			LCD_DisplayString(160,30,16,(u8*)Info_String[step-1]);
 			LCD_DisplayString(40,60,16,"Press D To Choose Stop");
-			
+			LCD_DisplayString(40,90,16,"Press A To Restart");
 			BRUSH_COLOR=WHITE;
-				Key_Mode2();
+			Key_Mode2();
 			break;
 		}
+
+		delay_ms(200);
 		}
 	delay_ms(30);
 	}

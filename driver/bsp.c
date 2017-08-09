@@ -25,8 +25,8 @@
 //	OV7670_Configuration();
 	InnerLoopInit();																		//内环周期初始化
 	TIM6_Start();																				//ControlLoop开始
-		Mode_Task();
-	EXTI_Configuration();
+	Mode_Task();																				//选择模式
+	EXTI_Configuration();																//按键中断初始化
 }
 
 
