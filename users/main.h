@@ -25,5 +25,6 @@
 #include "ov7670.h"
 #include "key.h"
 #include "exti.h"
+#include "encoder.h"
 #endif
 

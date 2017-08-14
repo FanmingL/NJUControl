@@ -55,7 +55,7 @@ char Get_KeyValue(void)
 {
 			int col=0,row=0;
 			Key_Mode1();
-			delay_us(200);
+			delay_us(600);
 			if (Key1_Val||Key2_Val||Key3_Val||Key4_Val){
 			if (Key1_Val){
 				row=0;
@@ -67,7 +67,7 @@ char Get_KeyValue(void)
 				row=3;
 			}
 			Key_Mode2();
-			delay_us(200);
+			delay_us(600);
 			if (Key5_Val||Key6_Val||Key7_Val||Key8_Val){
 			if (Key5_Val){
 				col=0;
@@ -88,11 +88,15 @@ char Get_KeyValue(void)
 }
 #define String_LENGTH 10
 int step=1;
-char Info_String[String_LENGTH][30]={{"Task1"},{"Task2"},{"Task3"},{"Task4"},{"Task5"},{"Task6"},{"Stop"},{"Press 8 and 2 To choose"},{"Press 5 To enter"},{"Press B To Calibrate"}};
+char Info_String[String_LENGTH][30]={{"Task1"},{"Task2"},{"Task3"},{"Task4"},{"Task5"},{"Task6"},{"Task7"},{"Press 8 and 2 To choose"},{"Press 5 To enter"},{"Press B To Calibrate"}};
+
+
 void Mode_Task(void)
 {
-	char temp;
+	char temp,temp2;
+	int j=0;
 	int i=0;
+	char buffer[256];
 	for (i=1;i<String_LENGTH+1;i++){LCD_DisplayString(40,i*30,16,(u8*)Info_String[i-1]);}
 	BACK_COLOR=RED;
 	LCD_DisplayString(40,30*step,16,(u8*)Info_String[step-1]);
@@ -109,7 +113,6 @@ void Mode_Task(void)
 				step=LIMIT(step,1,7);
 			}else if (temp=='B')
 			{
-
 			mpu6050.Acc_CALIBRATE = 1;		
 			mpu6050.Gyro_CALIBRATE = 1;	
 			LCD_Clear(BLACK);
@@ -120,8 +123,59 @@ void Mode_Task(void)
 					AppParamSave();
 				LCD_Clear(BLACK);
 				
+			}else if (temp=='C'){
+				ResetAngle();
+			
+			}else if (temp=='0'){
+			LCD_Clear(BLACK);
+			LCD_DisplayString(30,30,16,"Camera Calibrate...");
+			LCD_DisplayString(30,60,16,"Please put the ball on No.1 ");
+			LCD_DisplayString(30,90,16,"When You Make It Please Enter X ");
+				delay_ms(200);
+				for (j=0;j<9;j++){
+			while (1){
+				temp2 = Get_KeyValue();
+				if (temp2=='0')break;
+			}
+			if (temp2=='0'){
+				TargetPosition[j][0]=My_x;
+				TargetPosition[j][1]=My_y;
+				sprintf(buffer,"No %d is (%.2f,%.2f)",j+1,TargetPosition[j][0],TargetPosition[j][1]);
+				LCD_DisplayString(30,120,16,(u8*)buffer);
+				delay_ms(300);
+				AppParamSave();
 			}
 			
+			}
+				LCD_Clear(BLACK);
+			
+			sprintf(buffer,"(%.2f,%.2f)",TargetPosition[0][0],TargetPosition[0][1]);
+				LCD_DisplayString(30,30,16,(u8*)buffer);
+			sprintf(buffer,"(%.2f,%.2f)",TargetPosition[1][0],TargetPosition[1][1]);
+				LCD_DisplayString(30,90,16,(u8*)buffer);
+			sprintf(buffer,"(%.2f,%.2f)",TargetPosition[2][0],TargetPosition[2][1]);
+				LCD_DisplayString(30,150,16,(u8*)buffer);
+			sprintf(buffer,"(%.2f,%.2f)",TargetPosition[3][0],TargetPosition[3][1]);
+				LCD_DisplayString(30,210,16,(u8*)buffer);
+			sprintf(buffer,"(%.2f,%.2f)",TargetPosition[4][0],TargetPosition[4][1]);
+				LCD_DisplayString(60,30,16,(u8*)buffer);
+			sprintf(buffer,"(%.2f,%.2f)",TargetPosition[5][0],TargetPosition[5][1]);
+				LCD_DisplayString(60,90,16,(u8*)buffer);
+			sprintf(buffer,"(%.2f,%.2f)",TargetPosition[6][0],TargetPosition[6][1]);
+				LCD_DisplayString(60,150,16,(u8*)buffer);
+			sprintf(buffer,"(%.2f,%.2f)",TargetPosition[7][0],TargetPosition[7][1]);
+				LCD_DisplayString(60,210,16,(u8*)buffer);
+			sprintf(buffer,"(%.2f,%.2f)",TargetPosition[8][0],TargetPosition[8][1]);
+				LCD_DisplayString(90,30,16,(u8*)buffer);
+			sprintf(buffer,"(%.2f,%.2f)",TargetPosition[9][0],TargetPosition[9][1]);
+				LCD_DisplayString(90,90,16,(u8*)buffer);			
+				delay_ms(300);
+			}
+			while (Get_KeyValue()=='0')
+			{
+			break;
+				LCD_Clear(BLACK);
+			}
 		for (i=1;i<String_LENGTH+1;i++){
 			LCD_DisplayString(40,i*30,16,(u8*)Info_String[i-1]);
 		}
@@ -129,10 +183,7 @@ void Mode_Task(void)
 			LCD_DisplayString(40,step*30,16,(u8*)Info_String[step-1]);
 			BACK_COLOR=BLACK;
 		if (temp=='5'){
-			if (step!=0)
-			{NS = (enum PendulumMode)step;}
-			else
-			{NS = Stop;}
+	
 			LCD_Clear(BLACK);
 			BRUSH_COLOR=RED;
 			LCD_DisplayString(40,30,16,"Now You Choose ");
@@ -140,9 +191,59 @@ void Mode_Task(void)
 			LCD_DisplayString(40,60,16,"Press D To Choose Stop");
 			LCD_DisplayString(40,90,16,"Press A To Restart");
 			BRUSH_COLOR=WHITE;
-			Key_Mode2();
+			delay_ms(2000);
+			LCD_Clear(BLACK);
+			if ((enum PendulumMode)step==Task6){
+				LCD_Clear(BLACK);
+				LCD_DisplayString(30,30,16,"Please choose A B C D");
+				LCD_DisplayString(30,60,16,"Please choose A");
+				LCD_DisplayString(30,90,16,"Please choose B");
+				LCD_DisplayString(30,120,16,"Please choose C");
+				LCD_DisplayString(30,150,16,"Please choose D");
+				
+				for (i=0;i<4;i++){
+				while (	1)	
+				{
+					temp2 = Get_KeyValue();
+					if (temp2){
+					
+						if (temp2=='1'){ Task6_Buffer[i]=1;}
+						if (temp2=='2'){ Task6_Buffer[i]=2;}
+						if (temp2=='3'){ Task6_Buffer[i]=3;}
+						if (temp2=='4'){ Task6_Buffer[i]=4;}
+						if (temp2=='5'){ Task6_Buffer[i]=5;}
+						if (temp2=='6'){ Task6_Buffer[i]=6;}
+						if (temp2=='7'){ Task6_Buffer[i]=7;}
+						if (temp2=='8'){ Task6_Buffer[i]=8;}
+						if (temp2=='9'){ Task6_Buffer[i]=9;}
+						
+					sprintf(buffer,"A is %d                ",Task6_Buffer[i]);
+					LCD_DisplayString(30,2*30+30*i,16,(u8*)buffer);
+						delay_ms(400);
+						break;
+					}
+				
+				}
+
+				}
+				LCD_Clear(BLACK);
+				while (1){
+					LCD_DisplayString(30,30,16,"Please choose '5' to start");
+					temp2 = Get_KeyValue();
+					if (temp2){
+						LCD_Clear(BLACK);
+						break;
+					}
+					delay_ms(30);
+				}
+				
+			
+			}
+			NS =(enum PendulumMode)step;
+			
 			break;
 		}
+		
 
 		delay_ms(200);
 		}
@@ -153,4 +254,6 @@ void Mode_Task(void)
 
 
 }
+
+
 

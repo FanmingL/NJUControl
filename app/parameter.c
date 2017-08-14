@@ -5,24 +5,25 @@ _PID_arg_st PID2_arg;
 _PID_arg_st PID3_arg;
 _PID_arg_st PID4_arg;
 _PID_arg_st PID5_arg;
-
+_PID_arg_st PID6_arg;
 
 _PID_val_st PID1_val;
 _PID_val_st PID2_val;
 _PID_val_st PID3_val;
 _PID_val_st PID4_val;
 _PID_val_st PID5_val;
+_PID_val_st PID6_val;
 
 #define PID1_P 0.8f
-#define PID1_I 3.0f
-#define PID1_D 0.1f
+#define PID1_I 0.0f
+#define PID1_D 0.0f
 
 #define PID2_P 60.0f
 #define PID2_I 0.0f
 #define PID2_D 3.0f
 
-#define PID3_P 0.0f
-#define PID3_I 0.0f
+#define PID3_P 200.0f
+#define PID3_I 100.0f
 #define PID3_D 0.0f
 
 #define PID4_P 0.0f
@@ -32,6 +33,10 @@ _PID_val_st PID5_val;
 #define PID5_P 0.0f
 #define PID5_I 0.0f
 #define PID5_D 0.0f
+
+#define PID6_P 3000.0f
+#define PID6_I 1500.0f
+#define PID6_D 0.0f
 union _Pid_un_ pid_un;
 
 
@@ -62,8 +67,8 @@ void Para_ResetToFactorySetup(void)
 	PID1_arg.kp=PID1_P;
 	PID1_arg.ki=PID1_I;
 	PID1_arg.kd=PID1_D;
-	PID1_arg.inc_hz=20.0f;
-	PID1_arg.k_inc_d_norm=0.0;
+	PID1_arg.inc_hz=50.0f;
+	PID1_arg.k_inc_d_norm=0.5;
 	PID1_arg.k_pre_d=0.0f;
 	PID1_arg.k_ff=0.0f;
 	
@@ -99,11 +104,20 @@ void Para_ResetToFactorySetup(void)
 	PID5_arg.k_pre_d=0.0f;
 	PID5_arg.k_ff=0.0f;
 	
+	PID6_arg.kp=PID6_P;
+	PID6_arg.ki=PID6_I;
+	PID6_arg.kd=PID6_D;
+	PID6_arg.inc_hz=20.0f;
+	PID6_arg.k_inc_d_norm=0.0f;
+	PID6_arg.k_pre_d=0.0f;
+	PID6_arg.k_ff=0.0f;
+	
 }
 
 u8 pid_saved_flag=0;
 uint8_t AppParamSave(void)
 {
+	int i=0;
 	uint8_t retval=1;
 	
 	pid_un.save_to_flash.pid_st[0]=PID1_arg;
@@ -111,6 +125,11 @@ uint8_t AppParamSave(void)
 	pid_un.save_to_flash.pid_st[2]=PID3_arg;
 	pid_un.save_to_flash.pid_st[3]=PID4_arg;
 	pid_un.save_to_flash.pid_st[4]=PID5_arg;
+		pid_un.save_to_flash.pid_st[5]=PID6_arg;
+	for(i=0;i<9;i++){
+		pid_un.save_to_flash.TargetPosition[i][0]=TargetPosition[i][0];
+		pid_un.save_to_flash.TargetPosition[i][1]=TargetPosition[i][1];
+	}
 	pid_un.save_to_flash.pid_saved_flag=1;
 	pid_un.save_to_flash.sensor_setup=sensor_setup;
 	BSP_FLASH_Write(PARAM_SAVED_START_ADDRESS, pid_un.pid_array, sizeof(saveToFlash_st));
@@ -122,6 +141,7 @@ uint8_t AppParamSave(void)
 
 void PID_Para_Init(void)
 {
+	int i=0;
 	//BSP_FLASH_Read(PARAM_SAVED_FLAG_ADDRESS,&pid_saved_flag,1);
 	BSP_FLASH_Read(PARAM_SAVED_START_ADDRESS, pid_un.pid_array, sizeof(saveToFlash_st));
 	if (pid_un.save_to_flash.pid_saved_flag==1){
@@ -132,7 +152,11 @@ void PID_Para_Init(void)
 	PID3_arg=pid_un.save_to_flash.pid_st[2];
 	PID4_arg=pid_un.save_to_flash.pid_st[3];
 	PID5_arg=pid_un.save_to_flash.pid_st[4];
-		
+		PID6_arg=pid_un.save_to_flash.pid_st[5];
+	for(i=0;i<9;i++){
+		TargetPosition[i][0]=pid_un.save_to_flash.TargetPosition[i][0];
+		TargetPosition[i][1]=pid_un.save_to_flash.TargetPosition[i][1];
+	}
 	sensor_setup=pid_un.save_to_flash.sensor_setup;
 		
 	memcpy(&mpu6050.Acc_Offset,&sensor_setup.Offset.Accel,sizeof(xyz_f_t));

@@ -31,7 +31,7 @@ void PWM_Configuration(void)
 	GPIO_PinAFConfig(GPIOB, GPIO_PinSource4, GPIO_AF_TIM3);
   GPIO_PinAFConfig(GPIOB, GPIO_PinSource5, GPIO_AF_TIM3); 
 	
-  TIM_TimeBaseStructure.TIM_Period = 1000;									
+  TIM_TimeBaseStructure.TIM_Period = 1000-1;									
   TIM_TimeBaseStructure.TIM_Prescaler = 84-1;		
   TIM_TimeBaseStructure.TIM_ClockDivision = 0;
   TIM_TimeBaseStructure.TIM_CounterMode = TIM_CounterMode_Up;
@@ -56,6 +56,26 @@ void PWM_Configuration(void)
 	TIM_CtrlPWMOutputs(TIM3, ENABLE);
   TIM_ARRPreloadConfig(TIM3, ENABLE);
   TIM_Cmd(TIM3, ENABLE);
+	
 }
 
+void Set_PitchRoll(float Pitch,float Roll)
+{
+		if (Pitch>0){
+			Pitch_ON();
+			Pitch_Motor_Out(((short)(Pitch)));
+		}else{
+			Pitch_OFF();
+			Pitch_Motor_Out(((short)(-Pitch)));
+		}	
+		if (Roll>0){
+			Roll_ON();
+			Roll_Motor_Out(((short)(Roll)));
+		}else{
+			Roll_OFF();
+			Roll_Motor_Out(((short)(-Roll)));
+		}	
+		
+
+}
 

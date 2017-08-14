@@ -8,8 +8,8 @@
 
 
 typedef struct {
-
-_PID_arg_st pid_st[5];
+float TargetPosition[9][2];
+_PID_arg_st pid_st[6];
 sensor_setup_t sensor_setup;
 u8 pid_saved_flag;
 }saveToFlash_st;
@@ -25,13 +25,14 @@ extern _PID_arg_st PID2_arg;
 extern _PID_arg_st PID3_arg;
 extern _PID_arg_st PID4_arg;
 extern _PID_arg_st PID5_arg;
-
+extern _PID_arg_st PID6_arg;
 
 extern _PID_val_st PID1_val;
 extern _PID_val_st PID2_val;
 extern _PID_val_st PID3_val;
 extern _PID_val_st PID4_val;
 extern _PID_val_st PID5_val;
+extern _PID_val_st PID6_val;
 void Para_ResetToFactorySetup(void);
 void Param_SaveAccelOffset(xyz_f_t *offset);
 void Param_SaveGyroOffset(xyz_f_t *offset);

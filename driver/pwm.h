@@ -7,5 +7,7 @@ void PWM_Configuration(void);
 											TIM3->CCR2=CH2;\
 											TIM3->CCR3=CH3;\
 											TIM3->CCR4=CH4;
-
+#define Pitch_Motor_Out(x) (TIM3->CCR3=x);
+#define Roll_Motor_Out(x) (TIM3->CCR4=x);
+void Set_PitchRoll(float Pitch,float Roll);
 #endif
